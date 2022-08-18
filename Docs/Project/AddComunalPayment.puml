@@ -1,0 +1,16 @@
+@startuml
+actor Actor as userActor
+userActor -> User : Авторизация
+User -> PaymentCollection : Создать
+PaymentCollection -> PaymentRecord : Создать
+PaymentRecord -> CommunalPayment : Создать
+CommunalPayment -> DBConnection : Создать
+database Database as DB
+DBConnection ->  DB : Запрос
+DB --> DBConnection : Вернуть данные
+DBConnection --> CommunalPayment : Вернуть
+CommunalPayment --> PaymentRecord : Вернуть
+PaymentRecord --> PaymentCollection : Вернуть
+PaymentCollection --> User : Вернуть
+User --> userActor : : Вернуть
+@enduml
